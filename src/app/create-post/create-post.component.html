@@ -1,0 +1,49 @@
+<div class="panel panel-default margins">
+  <h3>Create a new post</h3>
+  <form #form="ngForm" (ngSubmit)="submitPost()" class="product-form">
+
+    <!-- Title -->
+    <mat-form-field class="input-full-width">
+      <input matInput type="text" placeholder="Title" name="title"
+        [(ngModel)]="blogPost.title" required />
+    </mat-form-field>
+
+      <!-- Author -->
+      <mat-form-field class="input-full-width">
+        <input matInput type="text" placeholder="Author" name="author"
+          [(ngModel)]="blogPost.author" required/>
+      </mat-form-field>
+
+      <!-- Date -->
+      <mat-form-field class="input-full-width">
+        <input matInput type="datetime" placeholder="Date" name="date"
+          [(ngModel)]="blogPost.date" required disabled/>
+      </mat-form-field>
+
+      <!-- Tags -->
+      <mat-form-field class="input-full-width">
+        <input matInput type="text" placeholder="Tags" name="tags"
+          [(ngModel)]="tagsInput" (keyup)="parseTags()" required/>
+      </mat-form-field>
+
+      <!-- ImageUrl -->
+      <mat-form-field class="input-half-width">
+        <textarea matInput type="text" placeholder="Image url" name="url" rows="5"
+        [(ngModel)]="blogPost.imageURL"></textarea>
+      </mat-form-field>
+      <img src="{{blogPost.imageURL}}" alt="" class="input-half-width">
+
+      <mat-form-field style="display: block">
+        <mat-select placeholder="Status" [(value)]="blogPost.status">
+          <mat-option [value]="1">Active</mat-option>
+          <mat-option [value]="2">Inactive</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <p-editor [(ngModel)]="blogPost.content" [style]="{'height':'320px'}" name="content" required></p-editor>
+
+      <button mat-raised-button color="primary" type="button" (click)="submitPost()" [disabled]="form.pristine || form.invalid" id="submit-button">Submit</button>
+      <button mat-raised-button color="warn" type="button" (click)="clearForm()">Clear</button>
+
+  </form>
+</div>
