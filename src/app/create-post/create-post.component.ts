@@ -4,6 +4,7 @@ import { BlogPost } from '../blog-post';
 import { BlogPostStatus } from '../blog-post';
 
 import { POSTS } from '../posts';
+import { Message } from 'primeng/components/common/message';
 
 @Component({
   selector: 'nk-create-post',
@@ -12,34 +13,25 @@ import { POSTS } from '../posts';
 })
 export class CreatePostComponent implements OnInit {
 
-  private blogPost: BlogPost = new BlogPost(undefined, new Date(), undefined, undefined, undefined, []);
-  private tagsInput: string;
-  private status = BlogPostStatus;
+  private blogPost: BlogPost;
+  msgs: Message[] = [];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  parseTags(): void {
-    this.blogPost.tags = [];
-    let splitted = this.tagsInput.split(',');
-    splitted.forEach((tag, ind) => {
-      this.blogPost.tags[ind] = tag.trim();
-    });
+  formSubmitted(createdPost: BlogPost) {
+    console.log(createdPost);
+    this.blogPost = createdPost;
 
-    console.log(this.blogPost.content);
-  }
+    const id = POSTS.reduce((prev, curr) =>
+      new BlogPost(Math.max(prev.id, curr.id), undefined, undefined, undefined, undefined, [])).id;
 
-  clearForm() {
-    this.blogPost = new BlogPost(undefined, new Date(), undefined, undefined, undefined, []);
-  }
-
-  submitPost(): void {
-    console.log(this.blogPost);
-
+    this.blogPost.id = id + 1;
     POSTS.push(this.blogPost);
-    this.clearForm();
+    this.msgs = [];
+    this.msgs.push({severity: 'success', summary: 'Post submitted', detail: ''});
   }
 
 }

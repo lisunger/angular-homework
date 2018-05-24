@@ -1,5 +1,57 @@
-<p>
-  list-post works!
-</p>
+<div class="panel panel-default margins">
 
-{{count}}
+  <div class="options">
+     <span>
+        <mat-form-field>
+            <mat-select placeholder="Sort by status" (selectionChange)="onStatusFilter($event)">
+              <mat-option [value]="0">
+                None
+              </mat-option>
+              <mat-option [value]="1">
+                Active
+              </mat-option>
+              <mat-option [value]="2">
+                Inactive
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+     </span>
+
+     <span>
+       Sort by date: &nbsp;
+        <mat-button-toggle-group (change)="onDateSort($event)">
+          <!-- <mat-button-toggle value="no">No</mat-button-toggle> -->
+          <mat-button-toggle value="asc"><i class="fas fa-angle-up"></i></mat-button-toggle>
+          <mat-button-toggle value="desc"><i class="fas fa-angle-down"></i></mat-button-toggle>
+        </mat-button-toggle-group>
+     </span>
+
+  </div>
+
+  <mat-card class="post-card" *ngFor="let c of postsList">
+
+    <mat-card-header>
+      <mat-card-title class="title">{{c.title}}</mat-card-title>
+      <mat-card-subtitle>By {{c.author}}, submitted on {{c.date | date}}</mat-card-subtitle>
+      <i *ngIf="c.status === 2" class="fas fa-kiwi-bird" style="color: #ff3300" matTooltip="Inactive" [matTooltipPosition]="position"></i>
+      <i *ngIf="c.status === 1" class="fas fa-crow" style="color: #66ff33" matTooltip="Active" [matTooltipPosition]="position"></i>
+    </mat-card-header>
+
+    <div *ngIf="c.imageURL">
+      <img src="{{c.imageURL}}" class="post-image">
+    </div>
+
+    <div>
+      <mat-card-content>
+        <p [innerHTML]="c.content" class="contents">
+        </p>
+      </mat-card-content>
+    </div>
+
+    <mat-card-footer>
+      <div *ngFor="let t of c.tags" class="badge">{{t}}</div>
+    </mat-card-footer>
+
+  </mat-card>
+
+</div>

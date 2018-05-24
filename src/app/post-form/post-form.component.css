@@ -1,0 +1,30 @@
+.product-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+.input-half-width {
+  width: 50%;
+}
+
+.margins {
+  margin: auto;
+  margin-top: 20px;
+  width: 600px;
+  padding: 20px;
+}
+
+#submit-button:enabled {
+  background-color: #D6D84F;
+  color: #4F3824;
+}
+
+#submit-button {
+  float:left;
+  margin-right: 20px;
+}

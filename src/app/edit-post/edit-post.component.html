@@ -1,3 +1,24 @@
-<p>
-  edit-post works!
-</p>
+<div class="panel panel-default margins" *ngIf="postsList.length > 0">
+    <mat-card class="post-card" class="post-card" *ngFor="let c of postsList">
+        <mat-card-title>{{c.title}}</mat-card-title>
+
+        <mat-card-subtitle>By {{c.author}}, submitted on {{c.date | date}}</mat-card-subtitle>
+
+        <mat-card-actions>
+          <button pButton type="button" (click)="onClickEdit(c)" label="Edit" class="ui-button-secondary"></button>
+          <button pButton type="button" (click)="onClickDelete(c)" label="Delete" class="ui-button-danger"></button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<p-dialog header="Confirm delete" [(visible)]="deleteDialogVisibility" (onHide)="deleteCanceled()" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70">
+    <span>Are you sure you want to delete the post?</span>
+    <p-footer>
+        <button type="button" pButton icon="fa-check" (click)="deleteConfirmed()" label="Yes" class="ui-button-danger"></button>
+        <button type="button" pButton icon="fa-times" (click)="deleteCanceled()" label="No" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>
+
+<p-dialog header="Edit" [(visible)]="editDialogVisibility" (onHide)="editCanceled()" [modal]="true" [responsive]="true" [width]="700" [minWidth]="700" [minY]="500">
+    <nk-post-form [heading]="'Edit post'" [blogPost]= "editedCopy" (createdPost)="editSubmitted($event)"></nk-post-form>
+</p-dialog>

@@ -12,15 +12,24 @@ import { AppRoutingModule } from './/app-routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 
 import { EditorModule } from 'primeng/editor';
+import { GrowlModule } from 'primeng/growl';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { PostFormComponent } from './post-form/post-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreatePostComponent,
     ListPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +40,14 @@ import { EditorModule } from 'primeng/editor';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    MatCardModule,
+    MatTooltipModule,
+    MatButtonToggleModule,
 
-    EditorModule
+    EditorModule,
+    GrowlModule,
+    DialogModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

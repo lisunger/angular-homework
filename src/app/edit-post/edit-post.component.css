@@ -1,0 +1,16 @@
+.margins {
+  margin: auto;
+  width: 600px;
+}
+
+.post-card {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ui-button {
+  border: none !important;
+  font-weight: bold !important;
+}

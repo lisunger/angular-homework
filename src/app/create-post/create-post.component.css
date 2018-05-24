@@ -13,12 +13,18 @@
 }
 
 .margins {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: auto;
+  margin-top: 20px;
+  width: 600px;
   padding: 20px;
 }
 
 #submit-button:enabled {
   background-color: #D6D84F;
   color: #4F3824;
+}
+
+#submit-button {
+  float:left;
+  margin-right: 20px;
 }

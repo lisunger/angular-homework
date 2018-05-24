@@ -1,0 +1,49 @@
+.options {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.options span {
+  margin-left: 20px;
+}
+
+.mat-card-footer {
+  width: 100%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.mat-card-footer .badge {
+  margin-right: 10px;
+}
+
+.post-card {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.margins {
+  margin: auto;
+  width: 600px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.post-image {
+  max-width: 100px;
+  margin: 20px;
+}
+
+.contents {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-height: 200px;
+}
