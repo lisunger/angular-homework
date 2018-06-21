@@ -22,6 +22,8 @@ import { GrowlModule } from 'primeng/growl';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { PostFormComponent } from './post-form/post-form.component';
+import { BlogsMockService } from './services/blogs-mock.service';
+import { BlogsMongoService } from './services/blogs-mongo.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,10 @@ import { PostFormComponent } from './post-form/post-form.component';
     DialogModule,
     ButtonModule
   ],
-  providers: [],
+  providers: [
+    BlogsMockService,
+    BlogsMongoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

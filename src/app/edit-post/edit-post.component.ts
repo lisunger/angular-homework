@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogPost } from 'src/app/blog-post';
-import { POSTS } from 'src/app/posts';
+import { BlogsMockService } from 'src/app/services/blogs-mock.service';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { POSTS } from 'src/app/posts';
 })
 export class EditPostComponent implements OnInit {
 
-  constructor() { }
+  constructor(private blogService: BlogsMockService) { }
   postsList;
   deleteDialogVisibility = false;
   editDialogVisibility = false;
@@ -18,7 +18,10 @@ export class EditPostComponent implements OnInit {
   editedCopy: BlogPost;
 
   ngOnInit() {
-    this.postsList = POSTS.slice(0, 14);
+    this.blogService.getPosts()
+      .subscribe(res => {
+        this.postsList = res;
+      });
     this.selectedPost = new BlogPost(undefined, undefined, undefined, undefined, undefined, undefined);
     this.editedCopy = new BlogPost(undefined, undefined, undefined, undefined, undefined, undefined);
   }
@@ -35,9 +38,12 @@ export class EditPostComponent implements OnInit {
   }
 
   deleteConfirmed() {
-    const arrayIndex = POSTS.findIndex((post) => post.id === this.selectedPost.id);
-    POSTS.splice(arrayIndex, 1);
-    this.postsList = POSTS;
+    this.blogService.getPosts()
+      .subscribe(res => {
+        this.postsList = res;
+      });
+    this.blogService.deletePost(this.selectedPost.id + '')
+      .subscribe(res => {});
     this.deleteDialogVisibility = false;
     this.selectedPost = undefined;
   }
@@ -48,9 +54,13 @@ export class EditPostComponent implements OnInit {
   }
 
   editSubmitted(blogPost: BlogPost) {
-    const arrayIndex = POSTS.findIndex((post) => post.id === this.selectedPost.id);
-    POSTS[arrayIndex] = blogPost;
-    this.postsList = POSTS;
+    this.blogService.editPost(blogPost)
+    .subscribe(res => { });
+
+    this.blogService.getPosts()
+      .subscribe(res => {
+        this.postsList = res;
+      });
     this.editDialogVisibility = false;
   }
 

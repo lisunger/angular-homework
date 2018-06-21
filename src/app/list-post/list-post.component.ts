@@ -3,6 +3,7 @@ import { POSTS } from '../posts';
 import { MatSelectChange } from '@angular/material/select';
 import { BlogPostStatus } from '../blog-post';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { BlogsMockService } from 'src/app/services/blogs-mock.service';
 
 @Component({
   selector: 'nk-list-post',
@@ -11,15 +12,19 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 })
 export class ListPostComponent implements OnInit {
 
-  constructor() { }
+  constructor(private blogService: BlogsMockService) { }
   postsList;
   position = 'above';
 
   private count: number = POSTS.length;
 
   ngOnInit() {
-    this.postsList = POSTS.slice(0, 14);
-  }
+    this.blogService.getPosts()
+      .subscribe(res => {
+        this.postsList = res;
+      });
+    }
+
 
   onStatusFilter(event: MatSelectChange) {
     // value 1 - active; value 2 - inactive; value 0 - no filter
@@ -37,6 +42,7 @@ export class ListPostComponent implements OnInit {
         break;
     }
     this.postsList = this.postsList.slice(0, 14);
+
   }
 
   onDateSort(event: MatButtonToggleChange) {
